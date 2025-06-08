@@ -1,3 +1,13 @@
+# Projeto Remix com CRUD e Integração MetaMask
+
+Bem-vindo, um contrato inteligente em Solidity para gerenciar uma pequena biblioteca de livros direto na blockchain!
+
+Vou dividir em fases
+
+ - 1 BackEnd a criação do CRUD 
+ - 2 Integração MetaMask
+ - 3 FrontEnd exemplo com HTML e JavaScript
+
 # 📚 LivrosCRUD
 
 Bem-vindo ao **LivrosCRUD**, um contrato inteligente em Solidity para gerenciar uma pequena biblioteca de livros direto na blockchain!
