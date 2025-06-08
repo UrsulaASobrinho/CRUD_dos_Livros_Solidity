@@ -2,10 +2,10 @@
 
 Bem-vindo, um contrato inteligente em Solidity para gerenciar uma pequena biblioteca de livros direto na blockchain!
 
-Vou dividir em fases
+Vou dividir em três partes
 
- - 1 BackEnd a criação do CRUD 
- - 2 Integração MetaMask
+ - 1 BackEnd a criação do CRUD no REMIX
+ - 2 Integração MetaMask 
  - 3 FrontEnd exemplo com HTML e JavaScript
 
 # 📚 LivrosCRUD

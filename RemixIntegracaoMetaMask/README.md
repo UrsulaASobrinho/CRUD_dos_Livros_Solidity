@@ -1,4 +1,4 @@
-# Projeto Remix com CRUD e Integração MetaMask
+# Como Selecionar o Ambiente MetaMask no Remix
 
 ## Pré-requisitos
 
@@ -8,56 +8,59 @@ Antes de começar, certifique-se de que você já possui os seguintes requisitos
 - CRUD totalmente implementado e testado **livrosCRUD-v2.sol**
 - **MetaMask** instalada no navegador - se tiver dúvida pega algum tutorial na net é fácil a instalação. ahh!!! não utiliza a que vc coloca suas cripsta rsrsrs
 
----
 
-## Passo a Passo
 
-### 1. Clone o Repositório
-
-```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
-```
-
-### 2. Instale as Dependências
-
-```bash
-npm install
-# ou
-yarn install
-```
-
-### 3. Execute o Projeto Remix
-
-```bash
-npm run dev
-# ou
-yarn dev
-```
-
-### 4. Configure a MetaMask
-
-- Certifique-se de estar conectado na **MetaMask** com a rede correta (ex: localhost, testnet ou mainnet).
-- Importe ou crie a conta que será utilizada para as transações.
-
-### 5. Teste o CRUD
-
-- Acesse o endereço do projeto (normalmente `http://localhost:3000`).
-- Realize operações de **criar, ler, atualizar e deletar** para garantir que o CRUD está funcionando.
-
-### 6. Integração com a MetaMask
-
-- Após garantir que o CRUD está funcionando, utilize os componentes de integração com a **MetaMask** para realizar transações, autenticação ou interação com smart contracts conforme a lógica do seu projeto.
-
-### 7. Customização e Deploy
-
-- Adapte o projeto conforme necessário.
-- Faça o deploy em ambiente de produção se desejar.
+Siga os passos abaixo para configurar o Remix IDE e conectar com a MetaMask:
 
 ---
 
-## Observações
+## 1. Abra o Remix IDE
 
-- Este guia parte do princípio que o projeto já está estruturado e os requisitos acima já foram atendidos.
-- Para dúvidas sobre Remix, consulte a [documentação oficial do Remix](https://remix.run/docs).
-- Para dúvidas sobre MetaMask, acesse a [documentação oficial da MetaMask](https://docs.metamask.io/).
+Acesse: [https://remix.ethereum.org](https://remix.ethereum.org)
+
+---
+
+## 2. Acesse a Aba "Deploy & Run Transactions"
+
+No menu lateral esquerdo, clique no ícone de Ethereum (ícone de plug), que é a aba chamada **Deploy & Run Transactions**.
+
+---
+
+## 3. Selecione o Ambiente MetaMask
+
+No topo dessa aba, você verá um campo chamado **Environment** com um menu suspenso. Ele provavelmente estará como:
+
+- Remix VM (London) **ou**
+- Remix VM (Prague)
+
+Clique nesse menu suspenso e selecione a opção:
+
+> ✅ **Injected Provider - MetaMask**
+
+⚠️ **Nota:** Essa opção só aparece se o MetaMask estiver instalado e desbloqueado no seu navegador.
+
+---
+
+## 4. Permita a Conexão com a MetaMask
+
+Assim que você selecionar, o Remix vai pedir permissão para conectar à sua carteira MetaMask. Aceite a conexão.
+
+Depois disso, o campo **Account** será preenchido com o endereço da sua carteira.
+
+---
+
+## 5. Pronto para Deploy
+
+Agora você pode clicar em **Deploy** para implantar o contrato na rede selecionada da MetaMask (por exemplo, Sepolia, Goerli, etc.).
+
+---
+
+## ❓ Problemas Comuns
+
+Se você **não vê a opção "Injected Provider - MetaMask"**:
+
+- Verifique se o MetaMask está instalado no navegador.
+- Certifique-se de que o MetaMask está desbloqueado (você fez login).
+- Atualize a página do Remix após desbloquear o MetaMask.
+
+---
