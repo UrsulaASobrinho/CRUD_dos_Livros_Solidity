@@ -169,6 +169,38 @@ livros[_id].ativo = false;
 
 ---
 
+### 🚀 Melhorias (LivrosCRUD_v3)
+
+Coloquei o constructor e restrições para dono do contrato
+
+```
+ // Construtor
+    constructor() {
+        dono = msg.sender;
+    }
+
+     // Modificador para restringir acesso ao dono
+    modifier onlyOwner() {
+        require(msg.sender == dono, "Apenas o dono pode executar esta acao");
+        _;
+    }
+
+```
+
+ E o modificador onlyOwner é um controle de permissoes onde tem que colocar manualmente nas funções que deseja controlar quem acessa. No caso a váriavel dono tera o acesso único nas funções :
+
+ ## Controle de Permissões das Funções
+
+| Função              | Tem onlyOwner? | Quem pode usar?      |
+|---------------------|:--------------:|----------------------|
+| adicionarLivro      | ✅ Sim         | Somente o dono       |
+| atualizarLivro      | ✅ Sim         | Somente o dono       |
+| deletarLivro        | ✅ Sim         | Somente o dono       |
+| buscarLivro         | ❌ Não         | Qualquer pessoa      |
+| listarLivrosAtivos  | ❌ Não         | Qualquer pessoa      |
+| livroExiste         | ❌ Não         | Qualquer pessoa      |
+
+
 ## 📝 Testes
 
 Faça os testes usando frameworks como [Remix IDE](https://remix.ethereum.org/) para interagir com o contrato e garantir o funcionamento de todas as operações.

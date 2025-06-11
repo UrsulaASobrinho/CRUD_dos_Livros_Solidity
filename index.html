@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>LivroCRUD Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <h1>Interface do Contrato LivroCRUD</h1>
+
+    <button id="connectButton">Conectar MetaMask</button>
+    <p id="account"></p>
+
+    <h2>Adicionar Livro</h2>
+    <form id="addBookForm">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" required>
+        <br>
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" required>
+        <br>
+        <button type="submit">Adicionar</button>
+    </form>
+    <p id="addBookResult"></p>
+
+    <h2>Listar Livros Ativos</h2>
+    <button id="listBooksButton">Listar</button>
+    <ul id="booksList"></ul>
+
+    <script>
+        const contractAddress = "0xac89f50b67d9ab86a2e5e38e55344d95a27b5002";
+      const contractABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_titulo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_autor",
+				"type": "string"
+			}
+		],
+		"name": "adicionarLivro",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_novoTitulo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_novoAutor",
+				"type": "string"
+			}
+		],
+		"name": "atualizarLivro",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "deletarLivro",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "buscarLivro",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "contadorLivros",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "dono",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idsLivros",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "listarLivrosAtivos",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "autor",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct LivroCRUD.Livro[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "livroExiste",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "livros",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "titulo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "autor",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "ativo",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+
+        let web3;
+        let contract;
+        let account;
+
+        async function connect() {
+        if (window.ethereum) {
+            try {
+                web3 = new Web3(window.ethereum);
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const accounts = await web3.eth.getAccounts();
+                account = accounts[0];
+                document.getElementById("account").innerText = "Conta conectada: " + account;
+                contract = new web3.eth.Contract(contractABI, contractAddress);
+            } catch (error) {
+                console.error("Erro ao conectar MetaMask:", error);
+                alert("Erro ao conectar MetaMask: " + error.message);
+            }
+        } else {
+            alert("MetaMask não detectado! Instale a extensão no seu navegador.");
+        }
+    }
+
+
+        console.log("Contrato carregado:", contract);
+
+
+        document.getElementById("connectButton").addEventListener("click", connect);
+
+        document.getElementById("addBookForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const titulo = document.getElementById("titulo").value;
+            const autor = document.getElementById("autor").value;
+            try {
+                await contract.methods.adicionarLivro(titulo, autor).send({ from: account });
+                document.getElementById("addBookResult").innerText = "Livro adicionado com sucesso!";
+            } catch (err) {
+                document.getElementById("addBookResult").innerText = "Erro: " + err.message;
+            }
+        });
+
+        document.getElementById("listBooksButton").addEventListener("click", async () => {
+            try {
+                const livros = await contract.methods.listarLivrosAtivos().call();
+                const list = document.getElementById("booksList");
+                list.innerHTML = "";
+                livros.forEach(livro => {
+                    const item = document.createElement("li");
+                    item.textContent = `ID: ${livro.id}, Título: ${livro.titulo}, Autor: ${livro.autor}`;
+                    list.appendChild(item);
+                });
+            } catch (err) {
+                alert("Erro ao listar livros: " + err.message);
+            }
+        });
+    </script>
+</body>
+</html>
